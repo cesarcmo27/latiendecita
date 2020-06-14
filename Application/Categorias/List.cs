@@ -26,6 +26,7 @@ namespace Application.Categorias
 
             public async Task<List<CategoriaDTO>> Handle(Query request, CancellationToken cancellationToken)
             {
+                //prueba
                 var categorias = await _context.Categorias.Include(a => a.SubCategoria).ToListAsync();
                 var newcategory = _mapper.Map<List<Categoria>,List<CategoriaDTO>>(categorias);
 
