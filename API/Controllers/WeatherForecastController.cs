@@ -35,5 +35,10 @@ namespace API.Controllers
             })
             .ToArray();
         }
-    }
+         [HttpGet]
+        public string GetNombre()
+        {
+           return "cesar";
+        }
+}
 }
