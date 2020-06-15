@@ -2,6 +2,9 @@
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
     projects: 'https://github.com/cesarcmo27/latiendecita/tree/master/API'
 # Build and test ASP.NET Core projects targeting the full .NET Framework.
 # Add steps that publish symbols, save build artifacts, and more:
