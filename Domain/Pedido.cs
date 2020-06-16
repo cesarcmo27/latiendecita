@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain
 {
@@ -7,7 +8,8 @@ namespace Domain
     {
         public Guid Id { get; set; }
         public DateTime FechaPedido { get; set; }
-        public Double Total { get; set; }
+        [Column(TypeName = "decimal(10, 2)")]
+        public decimal Total { get; set; }
         public int Estado { get; set; }
 
         public Guid HorarioEntregaId { get; set; }

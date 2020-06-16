@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain
 {
@@ -9,6 +10,7 @@ namespace Domain
         public string Nombre { get; set; }
         public string Marca { get; set; }
         public int  Cantidad { get; set; }
+        [Column(TypeName = "decimal(10, 2)")]
         public decimal Precio { get; set; }
         public string Imagen { get; set; }
         public Guid TiendaId { get; set; }

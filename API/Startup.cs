@@ -28,29 +28,47 @@ namespace API
 
         public IConfiguration Configuration { get; }
 
+        public void ConfigureDevelopmentServices(IServiceCollection services)
+        {
+            services.AddDbContext<DataContext>(op =>
+                       {
+                           op.UseSqlServer(Configuration.GetConnectionString("SQLServerConnection"));
+                       });
+            ConfigureServices(services);
+        }
+
+          public void ConfigureProductionServices(IServiceCollection services)
+        {
+            services.AddDbContext<DataContext>(op =>
+                       {
+                           op.UseSqlServer(Configuration.GetConnectionString("SQLServerConnection"));
+                       });
+            ConfigureServices(services);
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(op =>
-            {
-                op.UseMySql(Configuration.GetConnectionString("MySqlConnection"));
-            });
 
-            services.AddCors(opt=>{
-                opt.AddPolicy("CorsPolicy",policy =>{
-                   policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin(); 
+
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("CorsPolicy", policy =>
+                {
+                    policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
                 });
             });
 
             services.AddMediatR(typeof(List.Handler).Assembly);// basta con una para que llame a todas
             services.AddAutoMapper(typeof(List.Handler).Assembly);
 
-            services.AddControllers().AddFluentValidation(cfg =>{
+            services.AddControllers().AddFluentValidation(cfg =>
+            {
                 cfg.RegisterValidatorsFromAssemblyContaining<Create>();
             });
 
-            
-            
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

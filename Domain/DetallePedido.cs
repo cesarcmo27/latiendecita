@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain
 {
@@ -10,7 +11,8 @@ namespace Domain
       public Articulo Articulo { get; set; }
 
       public int Cantidad { get; set; }
-      public Double Precio { get; set; }
+      [Column(TypeName = "decimal(10, 2)")]
+      public decimal Precio { get; set; }
 
     }
 }

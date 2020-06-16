@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
@@ -114,8 +113,8 @@ namespace Persistence.Migrations
                     Logo = table.Column<string>(nullable: true),
                     Estado = table.Column<byte>(nullable: false),
                     Direccion = table.Column<string>(nullable: true),
-                    PosicionX = table.Column<decimal>(nullable: false),
-                    PosicionY = table.Column<decimal>(nullable: false)
+                    PosicionX = table.Column<decimal>(type: "decimal(18, 6)", nullable: false),
+                    PosicionY = table.Column<decimal>(type: "decimal(18, 6)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -127,7 +126,7 @@ namespace Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -148,7 +147,7 @@ namespace Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -280,7 +279,7 @@ namespace Persistence.Migrations
                     Nombre = table.Column<string>(nullable: true),
                     Marca = table.Column<string>(nullable: true),
                     Cantidad = table.Column<int>(nullable: false),
-                    Precio = table.Column<decimal>(nullable: false),
+                    Precio = table.Column<decimal>(type: "decimal(10, 2)", nullable: false),
                     Imagen = table.Column<string>(nullable: true),
                     TiendaId = table.Column<Guid>(nullable: false),
                     SubCategoriaId = table.Column<Guid>(nullable: false)
@@ -308,7 +307,7 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     FechaPedido = table.Column<DateTime>(nullable: false),
-                    Total = table.Column<double>(nullable: false),
+                    Total = table.Column<decimal>(type: "decimal(10, 2)", nullable: false),
                     Estado = table.Column<int>(nullable: false),
                     HorarioEntregaId = table.Column<Guid>(nullable: false),
                     AppUserId = table.Column<string>(nullable: true)
@@ -337,7 +336,7 @@ namespace Persistence.Migrations
                     PedidoId = table.Column<Guid>(nullable: false),
                     ArticuloId = table.Column<Guid>(nullable: false),
                     Cantidad = table.Column<int>(nullable: false),
-                    Precio = table.Column<double>(nullable: false)
+                    Precio = table.Column<decimal>(type: "decimal(10, 2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -359,17 +358,17 @@ namespace Persistence.Migrations
             migrationBuilder.InsertData(
                 table: "Empleados",
                 columns: new[] { "Id", "Apellido", "Cargo", "CodigoId", "Edad", "EsPlanilla", "FechaNaciemiento", "Nombre" },
-                values: new object[] { new Guid("26bf3daa-b398-458c-a728-f0719be687cc"), "Perez", "Jefe", "000", 29, true, new DateTime(2020, 10, 15, 19, 50, 10, 22, DateTimeKind.Local).AddTicks(3874), "Juan" });
+                values: new object[] { new Guid("b5f92326-773a-4207-86dc-0a2b15cb5878"), "Perez", "Jefe", "000", 29, true, new DateTime(2020, 10, 16, 11, 43, 41, 808, DateTimeKind.Local).AddTicks(722), "Juan" });
 
             migrationBuilder.InsertData(
                 table: "Empleados",
                 columns: new[] { "Id", "Apellido", "Cargo", "CodigoId", "Edad", "EsPlanilla", "FechaNaciemiento", "Nombre" },
-                values: new object[] { new Guid("15e183f9-50cf-44e4-8930-9b8876f84091"), "Cueva", "Gerente", "000", 45, true, new DateTime(2020, 8, 15, 19, 50, 10, 24, DateTimeKind.Local).AddTicks(5826), "Cesar" });
+                values: new object[] { new Guid("63c9849f-4b13-4017-bec2-844522330dbe"), "Cueva", "Gerente", "000", 45, true, new DateTime(2020, 8, 16, 11, 43, 41, 809, DateTimeKind.Local).AddTicks(7671), "Cesar" });
 
             migrationBuilder.InsertData(
                 table: "Empleados",
                 columns: new[] { "Id", "Apellido", "Cargo", "CodigoId", "Edad", "EsPlanilla", "FechaNaciemiento", "Nombre" },
-                values: new object[] { new Guid("9ad49837-1e5e-49f4-a90f-99bf04081adf"), "Mercedez", "Gerente", "000", 45, false, new DateTime(2020, 7, 15, 19, 50, 10, 24, DateTimeKind.Local).AddTicks(5958), "Maria" });
+                values: new object[] { new Guid("14ed1b5e-035e-41f3-91bb-5b588a9b65f4"), "Mercedez", "Gerente", "000", 45, false, new DateTime(2020, 7, 16, 11, 43, 41, 809, DateTimeKind.Local).AddTicks(7756), "Maria" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Articulos_SubCategoriaId",
@@ -390,7 +389,8 @@ namespace Persistence.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true);
+                unique: true,
+                filter: "[NormalizedName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -416,7 +416,8 @@ namespace Persistence.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true);
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DetallePedido_ArticuloId",
