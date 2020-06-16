@@ -120,10 +120,70 @@ namespace Persistence
                 context.Articulos.AddRange(articulos);
 
             }
+             if (!context.Calendario.Any())
+            {
+                var calendarios = new List<Calendario>{
+                    new Calendario {Id = Guid.NewGuid (),
+                                  Fecha=Convert.ToDateTime("16/06/2020"),
+                                  Dia=16,
+                                  Mes=6,
+                                  Anho= 2020
+                                   },
+                    new Calendario {Id = Guid.NewGuid (),
+                                  Fecha=Convert.ToDateTime("17/06/2020"),
+                                  Dia=17,
+                                  Mes=6,
+                                  Anho= 2020
+                                   },
+                     new Calendario {Id = Guid.NewGuid (),
+                                  Fecha=Convert.ToDateTime("18/06/2020"),
+                                  Dia=18,
+                                  Mes=6,
+                                  Anho= 2020
+                                   },
+                };
+                context.Calendario.AddRange(calendarios);
 
+                var horarios = new List<Horario>{
+                    new Horario {Id = Guid.NewGuid (),
+                                HoraEntrega="09:00am - 10:00am",
+                                   },
+                    new Horario {Id = Guid.NewGuid (),
+                                HoraEntrega="11:00am - 12:00pm",
+                                   },
+                     new Horario {Id = Guid.NewGuid (),
+                                HoraEntrega="04:00pm - 05:00pm",
+                                   },
+                };
+                context.Horario.AddRange(horarios);
 
+                var horariosEntrega = new List<HorarioEntrega>{
+                    new HorarioEntrega {Id = Guid.NewGuid (),
+                                CalendarioId=calendarios[0].Id,
+                                HorarioId=horarios[0].Id
+                                   },
+                    new HorarioEntrega {Id = Guid.NewGuid (),
+                                CalendarioId=calendarios[0].Id,
+                                HorarioId=horarios[1].Id
+                                   },
+                    new HorarioEntrega {Id = Guid.NewGuid (),
+                                CalendarioId=calendarios[1].Id,
+                                HorarioId=horarios[0].Id
+                                   },
+                    new HorarioEntrega {Id = Guid.NewGuid (),
+                                CalendarioId=calendarios[1].Id,
+                                HorarioId=horarios[2].Id
+                                   },
+                     new HorarioEntrega {Id = Guid.NewGuid (),
+                                CalendarioId=calendarios[2].Id,
+                                HorarioId=horarios[1].Id
+                                   },
+                   
+                    };
+                context.HorarioEntrega.AddRange(horariosEntrega);
+
+            }
             context.SaveChanges();
         }
     }
-
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Domain
 {
@@ -14,6 +15,8 @@ namespace Domain
         public virtual Tienda Tienda { get; set; }
         public Guid SubCategoriaId { get; set; }
         public virtual SubCategoria SubCategoria { get; set; }
+
+        public virtual ICollection<DetallePedido> DetallePedido { get; set; }
 
     }
 }
