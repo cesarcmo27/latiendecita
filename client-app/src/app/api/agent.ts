@@ -24,6 +24,7 @@ const Empleados = {
 
 const Categorias ={
     list   : () : Promise<ICategoria[]> => request.get('categoria')
+    
 }
 
 export default {
