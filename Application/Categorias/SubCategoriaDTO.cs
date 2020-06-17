@@ -6,7 +6,7 @@ namespace Application.Categorias
     {
         public Guid Id { get; set; }
         public string Nombre { get; set; }
-        public Guid CategoriaId { get; set; }
+        //public Guid CategoriaId { get; set; }
 
     }
 }

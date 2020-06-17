@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Menu } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import { RootStoreContext } from "../../app/stores/rootStore";
+import {observer } from "mobx-react-lite";
 
-export const NavBarLeft = () => {
+const NavBarLeft: React.FC = () => {
+
+  const rootStore = useContext(RootStoreContext);
+
   return (
     <Menu inverted vertical style={{ padding: 4, marginTop: "6em" }}>
       <Menu.Item>
@@ -50,3 +55,5 @@ export const NavBarLeft = () => {
     </Menu>
   );
 };
+
+export default observer(NavBarLeft);

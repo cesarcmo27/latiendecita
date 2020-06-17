@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { IEmpleado } from './../models/empleado';
+import { ICategoria } from './../models/categoria';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
@@ -21,7 +22,12 @@ const Empleados = {
     delete :  (id: string)        => request.del(`/empleado/${id}`)
 }
 
+const Categorias ={
+    list   : () : Promise<ICategoria[]> => request.get('categoria')
+}
+
 
 export default {
-    Empleados
+    Empleados,
+    Categorias
 }
